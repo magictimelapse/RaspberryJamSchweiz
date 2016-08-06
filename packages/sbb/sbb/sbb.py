@@ -12,15 +12,17 @@ import urllib
 class Sbb(object):
     """
     class to interface transport.opendata.ch
+    
+    This class interfaces straightforward transport.opendata.ch the resources /locations, /connections/ and /stationboard
 
     """
     __url = 'http://transport.opendata.ch'
     __APIVersion = 'v1'
     def connections(self,**kwargs):
         """
-        straight forward request to ~/connections
+        straight forward request to /connections
         @param self object pointer
-        @param **kwargs required are the keys from and to. All arguments are forward as query to ~/connections?query. The description of the parameters can be found here: https://transport.opendata.ch/examples/connections.php
+        @param **kwargs required are the keys from and to. All arguments are forward as query to /connections?query. The description of the parameters can be found here: https://transport.opendata.ch/docs.html#locations"
         @return json dictionary
         """
         if not 'from' in kwargs or not 'to' in kwargs:
@@ -29,6 +31,35 @@ class Sbb(object):
         resp = requests.get(url)
         data = json.loads(resp.text)
         return data
+
+
+    def locations(self, **kwargs):
+        """
+        straight forward request to /locations
+        @param self object pointer
+        @param **kwargs  All arguments are forward as query to /locations?query. The description of the parameters can be found here: https://transport.opendata.ch/do\
+cs.html#locations
+        """
+        url = "{0}/{1}/locations?{2}".format(self.__url, self.__APIVersion, urllib.urlencode(kwargs))
+        resp = requests.get(url)
+        data = json.loads(resp.text)
+        return data
+
+    def stationboard(self, **kwargs):
+        """
+        straight forward request to /stationboard
+        @param self object pointer
+        @param **kwargs  Required key is: station. All arguments are forward as query to /stationboard?query. The description of t\
+        he parameters can be found here: https://transport.opendata.ch/do\
+        cs.html#stationboard
+        """
+        
+        url = "{0}/{1}/locations?{2}".format(self.__url, self.__APIVersion, urllib.urlencode(kwargs))
+        resp = requests.get(url)
+        data = json.loads(resp.text)
+        return data                        
+
+     
 def nextConnection(von,bis):
     """
     Convenience function. Returns the time of the next connection as a string  
@@ -40,6 +71,5 @@ def nextConnection(von,bis):
     sbb = Sbb()
     kwargs = {'from':von, 'to':bis}
     data = sbb.connections(**kwargs)
-    #data = json.loads(resp.text)
     mydate= dateutil.parser.parse(data['connections'][0]['from']['departure'])
     return '{0:02d}:{1:02d}'.format(mydate.hour,mydate.minute)
