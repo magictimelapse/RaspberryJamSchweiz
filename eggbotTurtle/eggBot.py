@@ -36,8 +36,8 @@ class EggBot(object):
             for the first port with an EBB (EiBotBoard; EggBot controller board).
             YOU are responsible for closing this serial port!
             '''
-		assert isinstance(comPort, object)
-		if comPort is not None:
+        assert isinstance(comPort, object)
+        if comPort is not None:
             try:
                 serialPort = serial.Serial(comPort, timeout=1.0)  # 1 second timeout!
                 serialPort.write('v\r')
@@ -64,20 +64,21 @@ class EggBot(object):
         return None
 
     def __command(self,cmd):
-	if (self._port is not None) and (cmd is not None):
-		try:
-			self._port.write( cmd )
-			response = self._port.readline()
-			if ( response != 'OK\r\n' ):
-				if ( response != '' ):
-					print( 'After command ' + cmd + ',' )
-					print( 'Received bad response from EBB: ' + str( response ) + '.' )
-				else:
-					print( gettext.gettext( 'EBB Serial Timeout.') )
-		except:
-			pass 
+    if (self._port is not None) and (cmd is not None):
+        try:
+            self._port.write( cmd )
+            response = self._port.readline()
+            if ( response != 'OK\r\n' ):
+                if ( response != '' ):
+                    print( 'After command ' + cmd + ',' )
+                    print( 'Received bad response from EBB: ' + str( response ) + '.' )
+                else:
+                    print( gettext.gettext( 'EBB Serial Timeout.') )
+        except:
+            pass
 
     def query( self, cmd ):
+            # type: (object, object) -> object
             if (self.__port is not None) and (cmd is not None):
                     response = ''
                     try:
@@ -91,7 +92,7 @@ class EggBot(object):
                     return None
 
 
-    def doTimedPause( self, nPause ):
+    def __doTimedPause(self, nPause):
             if (self._port is not None):
                     while ( nPause > 0 ):
                             if ( nPause > 750 ):
@@ -131,13 +132,17 @@ class EggBot(object):
                     self.__command(  'TP\r')		
 
     def sendPenUp( self, PenDelay ):
+             """
+
+            :rtype: object
+            """
             if (self._port is not None):
                     self.__command(  'SP,1\r')		
                     if (PenDelay > 0):
-                            self.doTimedPause( PenDelay)
+                            self.__doTimedPause( PenDelay)
 
     def sendPenDown( self, PenDelay ):
             if (self._port is not None):
                     self.__command(  'SP,0\r')	
                     if (PenDelay > 0):
-                            self.doTimedPause( PenDelay)	
+                            self.__doTimedPause( PenDelay)
