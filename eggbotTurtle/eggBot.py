@@ -7,6 +7,7 @@ class EggBot(object):
     def __init__(self):
         self._port = self.__openPort()
 
+        
     def __findPort(self):	
 	#Find a single EiBotBoard connected to a USB port.
 	try:
