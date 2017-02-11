@@ -79,4 +79,67 @@ class EggBot(object):
 		except:
 			pass 
 
+    def query( self, cmd ):
+            if (self.__port is not None) and (cmd is not None):
+                    response = ''
+                    try:
+                            self.__port.write( cmd )
+                            response = self.__port.readline()
+                            unused_response = self.__port.readline() #read in extra blank/OK line
+                    except:
+                            print( gettext.gettext( "Error reading serial data." ) )
+                    return response
+            else:
+                    return None
 
+
+    def doTimedPause( self, nPause ):
+            if (self._port is not None):
+                    while ( nPause > 0 ):
+                            if ( nPause > 750 ):
+                                    td = int( 750 )
+                            else:
+                                    td = nPause
+                                    if ( td < 1 ):
+                                            td = int( 1 ) # don't allow zero-time moves
+                            self.__command( 'SM,' + str( td ) + ',0,0\r')		
+                            nPause -= td
+
+
+    def sendEnableMotors( self, Res ):
+            if (Res < 0):
+                    Res = 0
+            if (Res > 5):
+                    Res = 5	
+            if (self._port is not None):
+                    self.__command(  'EM,' + str(Res) + ',' + str(Res) + '\r' )
+                    # If Res == 0, -> Motor disabled
+                    # If Res == 1, -> 16X microstepping
+                    # If Res == 2, -> 8X microstepping
+                    # If Res == 3, -> 4X microstepping
+                    # If Res == 4, -> 2X microstepping
+                    # If Res == 5, -> No microstepping
+
+    def sendDisableMotors( self):
+            if (self._port is not None):
+                    self.__command(  'EM,0,0\r')	
+
+    def QueryPRGButton( self ):
+            if (self._port is not None):
+                    return self.query(  'QB\r' )
+
+    def TogglePen( self ):
+            if (self._port is not None):
+                    self.__command(  'TP\r')		
+
+    def sendPenUp( self, PenDelay ):
+            if (self._port is not None):
+                    self.__command(  'SP,1\r')		
+                    if (PenDelay > 0):
+                            self.doTimedPause( PenDelay)
+
+    def sendPenDown( self, PenDelay ):
+            if (self._port is not None):
+                    self.__command(  'SP,0\r')	
+                    if (PenDelay > 0):
+                            self.doTimedPause( PenDelay)	
