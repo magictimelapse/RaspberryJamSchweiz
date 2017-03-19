@@ -1,0 +1,47 @@
+# Maintainer: Reto Hasler <reto.hasler@asciich.ch>
+pkgname=sphereobot
+pkgver=0.13.0
+pkgrel=3
+epoch=
+pkgdesc="Sphere-O-Bot for arduino"
+arch=('any')
+url=""
+license=('GPL')
+groups=()
+depends=('arduino' 'arduino-avr-core')
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=()
+noextract=()
+md5sums=()
+validpgpkeys=()
+
+prepare() {
+    echo "running prepare"
+}
+
+build() {
+    echo "running build"
+}
+
+check() {
+    echo "running check"
+}
+
+package() {
+    echo "running package"
+    pwd
+    mkdir -p $pkgdir/opt/sphere-o-bot/
+    mkdir -p $pkgdir/usr/bin/
+    unzip ../Sphere-O-Bot-CODE_ARDUINO.zip -d $pkgdir/opt/sphere-o-bot/
+    cp ../sphere-o-bot-programmer $pkgdir/usr/bin/
+    chmod 755 $pkgdir/usr/bin/sphere-o-bot-programmer
+}

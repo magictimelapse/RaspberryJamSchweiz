@@ -1,0 +1,49 @@
+# Maintainer: Reto Hasler <reto.hasler@asciich.ch>
+pkgname=eggbot
+pkgver=2.4.0
+pkgrel=4
+epoch=
+pkgdesc="Inkscape EggBot plugin"
+arch=('any')
+url=""
+license=('GPL')
+groups=()
+depends=('inkscape')
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=()
+noextract=()
+md5sums=()
+validpgpkeys=()
+
+prepare() {
+    echo "running prepare"
+}
+
+build() {
+    echo "running build"
+}
+
+check() {
+    echo "running check"
+}
+
+package() {
+    echo "running package"
+    pwd
+    mkdir -p $pkgdir/usr/share/inkscape/extensions
+    unzip ../EggBot_extensions_v2.4.0.zip 'EggBot_extensions_v2.4.0/extensions/*' -d $pkgdir/usr/share/inkscape/extensions
+    mv $pkgdir/usr/share/inkscape/extensions/EggBot_extensions_v2.4.0/extensions/* $pkgdir/usr/share/inkscape/extensions
+    rm -rf $pkgdir/usr/share/inkscape/extensions/EggBot_extensions_v2.4.0/
+    rm -rf $pkgdir/usr/share/inkscape/extensions/hershey.inx
+    rm -rf $pkgdir/usr/share/inkscape/extensions/hershey.py
+    rm -rf $pkgdir/usr/share/inkscape/extensions/hersheydata.py
+}
