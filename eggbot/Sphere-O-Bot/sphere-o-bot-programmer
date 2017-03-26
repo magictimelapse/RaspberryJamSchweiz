@@ -1,0 +1,3 @@
+#!/bin/bash
+
+arduino /opt/sphere-o-bot/Ejjduino_ARDUINO/Ejjduino_ARDUINO.ino
