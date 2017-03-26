@@ -6,6 +6,13 @@ Important notice
 
 THE VERSION eggbot-2.8 is currently not working!!!
 
+
+External information
+---------------------
+
+- Assembli and user guide:
+-- http://www.jjrobots.com/sphere-o-bot-assembly-and-user-guide/
+
 Installation on ArchLinux
 --------------------------
 
