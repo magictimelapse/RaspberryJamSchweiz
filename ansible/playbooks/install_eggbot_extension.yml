@@ -1,0 +1,33 @@
+---
+- name: "Temporary directory"
+  file:
+    path: "/tmp/eggbot"
+    state: directory
+
+- name: "Extract eggbot extension"
+  unarchive:
+    src: "../eggbot/eggbot2_4/EggBot_extensions_v2.4.0.zip"
+    dest: "/tmp/eggbot"
+
+- name: Create extensions dir
+  file:
+    path: /home/pi/.config/inkscape/extensions
+    state: directory
+    owner: pi
+    group: pi
+
+- name: "Move files"
+  shell: cp -r /tmp/eggbot/EggBot_extensions_v2.4.0/extensions/* /home/pi/.config/inkscape/extensions
+  become_user: pi
+  become: yes
+
+- name: "Uploade example dir"
+  synchronize:
+    src: ../eggbot/examples/Eggbot
+    dest: /home/pi/Desktop/
+
+- name: "Uploade EggbotTurtle dir"
+  synchronize:
+    src: ../eggbotTurtle
+    dest: /home/pi/Desktop/
+

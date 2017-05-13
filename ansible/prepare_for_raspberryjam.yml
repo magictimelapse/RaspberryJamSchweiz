@@ -3,18 +3,33 @@
   remote_user: root
   tasks:
 
+    - name: "set keyboard layout"
+      copy:
+        src: "files/etc/default/keyboard"
+        dest: "/etc/default/keyboard"
+        backup: yes
+
     - name: "Install needed software"
       apt:
         name: "{{ item }}"
         state: latest
+        update_cache: yes
       with_items:
-        - ipython
+        - htop
         - inkscape
+        - ipython
+        - rsync
+
+    - name: "Include enable i2c service"
+      include: "playbooks/enable_i2c.yml"
+
+    - name: "Include VNC installation"
+      include: "playbooks/install_vnc.yml"
 
     - name: "Set passwords"
       user:
         name: "{{ item }}"
-        password: "$6$L75UYqwVvEyRWX08$mZpBH3DMVIcUi2D5xaYgFClHw0iPVup.wwO8H.vnnp2pIp1LcgFpqv4B3KmWes40XdANatbGguTu3ZVKRs85V."
+        password: "$6$nw959CQs8kPPq9xF$Iryuf7hB1pG4cFmnUU09NKzUbNUjoCk.Me7boIbL8dkMWoYFNMb7PbdCrZRptk5rxwMdxCO98lPAZp.jBamqQ."
         update_password: always
       with_items:
         - root
@@ -26,6 +41,9 @@
         dest: /home/pi/RaspberryJamSchweiz
       become: yes
       become_user: pi
+
+    - name: "Include Eggbot installation"
+      include: "playbooks/install_eggbot_extension.yml"
 
     - name: "Remove Games"
       apt:
