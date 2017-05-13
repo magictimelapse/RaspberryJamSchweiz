@@ -1,0 +1,17 @@
+---
+- name: "Install VNC Server"
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - realvnc-vnc-server
+    - realvnc-vnc-viewer
+
+- name: "Reload systemd units"
+  shell: systemctl daemon-reload
+
+- name: "Start and enable VNC server"
+  service:
+    name: vncserver-x11-serviced.service
+    state: started
+    enabled: yes

@@ -1,0 +1,54 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+
+    - name: "set keyboard layout"
+      copy:
+        src: "files/etc/default/keyboard"
+        dest: "/etc/default/keyboard"
+        backup: yes
+
+    - name: "Install needed software"
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      with_items:
+        - htop
+        - inkscape
+        - ipython
+        - rsync
+
+    - name: "Include enable i2c service"
+      include: "playbooks/enable_i2c.yml"
+
+    - name: "Include VNC installation"
+      include: "playbooks/install_vnc.yml"
+
+    - name: "Set passwords"
+      user:
+        name: "{{ item }}"
+        password: "$6$nw959CQs8kPPq9xF$Iryuf7hB1pG4cFmnUU09NKzUbNUjoCk.Me7boIbL8dkMWoYFNMb7PbdCrZRptk5rxwMdxCO98lPAZp.jBamqQ."
+        update_password: always
+      with_items:
+        - root
+        - pi
+
+    - name: "Clone RaspberryJam repository"
+      git:
+        repo: 'https://github.com/magictimelapse/RaspberryJamSchweiz.git'
+        dest: /home/pi/RaspberryJamSchweiz
+      become: yes
+      become_user: pi
+
+    - name: "Include Eggbot installation"
+      include: "playbooks/install_eggbot_extension.yml"
+
+    - name: "Remove Games"
+      apt:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - minecraft-pi
+        - python3-pygame

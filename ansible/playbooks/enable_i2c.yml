@@ -1,0 +1,15 @@
+---
+- name: "Load i2c kernel module at boot"
+  lineinfile: dest=/etc/modules line="i2c-dev"
+
+- name: "Load i2c kernel module at boot"
+  lineinfile: dest=/etc/modules line="i2c-bcm2708"
+
+- name: "Configure i2c kernel module"
+  shell: dtparam i2c_arm=on
+
+- name: "Load i2c kernel module"
+  modprobe: name=i2c-dev state=present
+
+- name: "Load i2c-bcm2708 kernel module"
+  modprobe: name=i2c-bcm2708 state=present
