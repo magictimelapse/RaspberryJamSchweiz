@@ -27,8 +27,20 @@ class KuegeliFarbe(object):
     def distance(self,P,b):
     # see https://de.serlo.org/mathe/geometrie/analytische-geometrie/abstaende-winkel/abstaende/abstand-punktes-einer-geraden-berechnen-analytische-geometrie
         return np.linalg.norm(np.cross(P, b))/np.linalg.norm(b)
-    
 
+    def rgb(self):
+        val = self._apds.readProximity()
+        color = (-1,-1,-1)
+        if val>254:
+            ambient = self._apds.readAmbientLight()
+            if ambient > 0:
+                r = float(255.*self._apds.readRedLight()/ambient)
+                g = float(255.*self._apds.readGreenLight()/ambient)
+                b = float(255.*self._apds.readBlueLight()/ambient)
+                color = (r,g,b) 
+        return color
+
+    
     def farbe(self):
         val = self._apds.readProximity()
         if val>254:
@@ -42,7 +54,7 @@ class KuegeliFarbe(object):
                 #print (ambient, math.sqrt(r*r + g*g + b*b))
                 minDistance = 1000
                 fitColor = "black"
-                #print (color)
+                print (color)
                 for ref in self.colorReferences:
                 ### Find the closest distance betweeen our color
                     dist = self.distance(color, ref["vector"])

@@ -5,3 +5,7 @@ Python3 scripts to:
 the apds9960 library was taken from here:
 https://github.com/liske/python-apds9960
 and converted with 2to3.py to python3.
+
+Depending on the color of the room you have to calibrate the color reference table in kuegelifarbe.py
+
+Todo: Use machine learning to distinguish colors. Added training sample
