@@ -1,0 +1,7 @@
+Python3 scripts to:
+- Recognize the color of a marble using the apds9960
+- Play a note with pysonic depending on the color of the marble
+
+the apds9960 library was taken from here:
+https://github.com/liske/python-apds9960
+and converted with 2to3.py to python3.
