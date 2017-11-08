@@ -5,15 +5,16 @@ from sklearn.preprocessing import StandardScaler
 kf = kuegelifarbe.KuegeliFarbe()
 from sklearn.externals import joblib
 clf = joblib.load("rgbClassifier2.pkl")
-farben = ["weiss", "rot", "gelb", "orange", "gruen"]
+farben = ["rot", "gelb", "orange", "gruen"]
 while True:
-    farbe = np.array(kf.rgb()).reshape(1,-1)
-    rgb = kf.rgb()
-    if rgb[0] == -1 or rgb == None or rgb[0]==255 or rgb[1] == 255 or rgb[2] == 255:
+    #farbe = np.array(kf.rgba()).reshape(1,-1)
+    rgba = kf.rgba()
+    threshold = 40
+    if rgba[0] == -1 or rgba == None or rgba[3]>threshold:
         continue
     #farbe = StandardScaler().fit_transform(farbe)
     #print (farbe)
-    farbe =  np.array(rgb).reshape(1,-1)
+    farbe =  np.array(rgba).reshape(1,-1)
     print (farbe)
     a = clf.predict(farbe)[0]
     print (a)

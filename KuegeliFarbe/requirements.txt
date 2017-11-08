@@ -1,3 +1,6 @@
+Adafruit-GPIO==1.0.3
+Adafruit-PCA9685==1.0.1
+Adafruit-PureIO==0.2.1
 Pygments==2.2.0
 RPi.GPIO==0.6.3
 decorator==4.1.2
@@ -13,9 +16,13 @@ ptyprocess==0.5.2
 python-apds9930==0.1
 python-osc==1.6.3
 python-sonic==0.3.0
+scikit-learn==0.19.1
+scipy==1.0.0
 simplegeneric==0.8.1
 six==1.11.0
+sklearn==0.0
 smbus==1.1
+spidev==3.2
 traitlets==4.3.2
 typing==3.6.2
 wcwidth==0.1.7

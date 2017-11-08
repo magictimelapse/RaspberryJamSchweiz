@@ -23,11 +23,26 @@ class KuegeliFarbe(object):
         self._apds = APDS9960(self._bus)
         self._apds.enableLightSensor()
         self._apds.enableProximitySensor()
+        self._apds.setAmbientLightGain(APDS9960_AGAIN_64X)
+        self._apds.setLEDBoost(APDS9960_LED_BOOST_300)
         
     def distance(self,P,b):
     # see https://de.serlo.org/mathe/geometrie/analytische-geometrie/abstaende-winkel/abstaende/abstand-punktes-einer-geraden-berechnen-analytische-geometrie
         return np.linalg.norm(np.cross(P, b))/np.linalg.norm(b)
 
+
+    def rgba(self):
+        val = self._apds.readProximity()
+        color = (-1,-1,-1,-1)
+        if val>254:
+            ambient = self._apds.readAmbientLight()
+            if ambient > 0:
+                r = self._apds.readRedLight()
+                g = self._apds.readGreenLight()
+                b = self._apds.readBlueLight()
+                color = (r,g,b,ambient) 
+        return color
+    
     def rgb(self):
         val = self._apds.readProximity()
         color = (-1,-1,-1)

@@ -12,10 +12,10 @@ def removeDuplicateRows(a):
     return unique_a.view(a.dtype).reshape((unique_a.shape[0], a.shape[1]))
 
 
-NumberOfUniqueEntriesPerColor = 150
-farben = ["weiss", "rot", "gelb", "orange", "gruen"]
+NumberOfUniqueEntriesPerColor = 400
+farben = ["rot", "gelb", "orange", "gruen"]
 kf = kuegelifarbe.KuegeliFarbe()
-data_targets = np.zeros((1,4),np.float32) 
+data_targets = np.zeros((1,5),np.int32) 
 #target = []
 for index,farbe in enumerate(farben):
     entries = 0
@@ -24,29 +24,30 @@ for index,farbe in enumerate(farben):
     else:
         input("bitte Kugel mit Farbe {0} vor Sensor halten und enter druecken".format(farbe))
     while entries<NumberOfUniqueEntriesPerColor-1:
-        rgb = kf.rgb()
-        if rgb[0] == -1 or rgb == None or rgb[0]==255 or rgb[1] == 255 or rgb[2] == 255:
+        rgba = kf.rgba()
+        threshold = 40
+        if rgba[0] == -1 or rgba == None or rgba[3]>threshold:
             continue
         #print ("rgb ",rgb, index)
-        data_target = list(rgb)
+        data_target = list(rgba)
         data_target.append(index) ## the index is the target
         #print (data_target)
         #print (data_targets)
         print (data_target)
-        data_targets = np.append(data_targets,np.array(data_target).reshape(1,4),axis=0)
+        data_targets = np.append(data_targets,np.array(data_target).reshape(1,5),axis=0)
         
         #data_targets = removeDuplicateRows(data_targets)
         #print (data_targets)
          #print (len(data_targets))
         entries = len(data_targets) % (NumberOfUniqueEntriesPerColor)
         print( entries, index)
-        time.sleep(0.25)
+        time.sleep(0.1)
 
 
 
 np.savetxt("data_target.txt", data_targets)
-data = data_targets[:,:3]
-target = data_targets[:,3]
+data = data_targets[:,:4]
+target = data_targets[:,4]
 from sklearn.externals import joblib
 X_train,X_test,y_train,y_test = train_test_split(data,target,test_size=0.1,random_state=0)
 
