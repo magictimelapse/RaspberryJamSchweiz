@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.externals import joblib
 import kuegelifarbe
 import time
-
+import testServo
 
 def removeDuplicateRows(a):
     a = np.ascontiguousarray(a)
@@ -22,10 +22,13 @@ for index,farbe in enumerate(farben):
     if farbe == "weiss":
         input("bitte weisses Papier vor Sensor halten und enter druecken")
     else:
+        testServo.auf()
+        time.sleep(2)
+        testServo.zu()
         input("bitte Kugel mit Farbe {0} vor Sensor halten und enter druecken".format(farbe))
     while entries<NumberOfUniqueEntriesPerColor-1:
         rgba = kf.rgba()
-        threshold = 40
+        threshold = 400
         if rgba[0] == -1 or rgba == None or rgba[3]>threshold:
             continue
         #print ("rgb ",rgb, index)

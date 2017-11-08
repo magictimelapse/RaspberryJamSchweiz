@@ -9,7 +9,7 @@ farben = ["rot", "gelb", "orange", "gruen"]
 while True:
     #farbe = np.array(kf.rgba()).reshape(1,-1)
     rgba = kf.rgba()
-    threshold = 40
+    threshold = 400
     if rgba[0] == -1 or rgba == None or rgba[3]>threshold:
         continue
     #farbe = StandardScaler().fit_transform(farbe)
