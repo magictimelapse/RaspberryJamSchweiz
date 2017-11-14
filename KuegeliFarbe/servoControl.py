@@ -7,6 +7,14 @@ servoEnd = 2.5
 
 HOST = 'localhost'
 PORT = 42001
+ServoPositions= {
+    0:{"auf":1.8, "zu":1.0},
+    1:{"auf":1.8, "zu":0.75},
+      2:{"auf":1.8, "zu":0.6},
+         3:{"auf":1.8, "zu":0.75}
+                 }
+                 
+
 def set_servo_pulse(channel, pulse):
     pulse_length = 1000000 # 1,000,000 us per second
     pulse_length /= 50 # 60 Hz
@@ -18,11 +26,12 @@ def set_servo_pulse(channel, pulse):
     pwm.set_pwm(channel, 0, pulse)
     pwm.set_pwm_freq(50)
 
-def auf():
-    set_servo_pulse(0,1.8)
+def auf(servoNummer=0):
+    set_servo_pulse(servoNummer,ServoPositions[servoNummer]["auf"])
 
-def zu():
-    set_servo_pulse(0,1.0)
+def zu(servoNummer=0):
+    set_servo_pulse(servoNummer,ServoPositions[servoNummer]["zu"])
+
 
 #if __name__ == "__main__":
 
