@@ -3,7 +3,7 @@ import numpy as np
 kf = kuegelifarbe.KuegeliFarbe()
 from sklearn.externals import joblib
 clf = joblib.load("rgbClassifier2.pkl")
-farben = ["rot", "gelb", "orange", "gruen"]
+farben = ["rot", "gelb", "orange", "gruen","leer"]
 
 def gibFarbe():
     rgba = kf.rgba()
