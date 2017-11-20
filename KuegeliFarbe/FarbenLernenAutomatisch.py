@@ -14,10 +14,12 @@ def removeDuplicateRows(a):
 
 append = True
 NumberOfUniqueEntriesPerColor = 200
-farben = ["rot", "gelb", "orange", "gruen", "leer"]
+farben = ["rot", "gelb", "orange", "gruen","blau", "leer"]
 kf = kuegelifarbe.KuegeliFarbe()
 data_targets = np.zeros((1,5),np.int32) 
 #target = []
+for servoNr in range(4):
+    sc.zu(servoNr)
 input("bitte laden mit den farben {}".format(farben))
 for index,farbe in enumerate(farben):
     entries = 0
