@@ -1,0 +1,23 @@
+- ansible: Set up, scipy, numpy, scikit-learn, ..
+
+POSTEN:
+- lichtschranken -> kuegeli zaehlen
+    -> auf display
+    -> auf pihat
+- RGB Sensor -> Musik
+- RGB Sensor -> Sortieren
+- RGB Sensor -> Machine Learning
+- Transport, bau der Kuegelibahn
+- Knoepfe mit Makey Makey fuer Servo ansteuern
+- Gestensensor in APDS9960 -> Servo bedienen
+- Roboter fuer Transport von Kuegelis
+
+
+
+Es braucht noch:
+Material fuer Kuegelibahn bauen
+2 Packungen Kuegelibahnen
+Lichtschranken, 12V Powersupply, Spannungsteiler
+Servo-Hat
+Servos
+Lange Jumper Kabel
