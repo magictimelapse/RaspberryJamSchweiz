@@ -13,5 +13,13 @@
 5. Run "Setup" -> "Internet connection"
 -- Define a new password
 -- 3G/4G connection
--- No authentication details needed ()
+-- Only the PIN for the SIM card is needed as authentication detail.
 -- Reboot the router
+
+## Setup WLAN Router
+
+1. Run "Setup" -> "Wireless Setting" -> "Wireless connection setup wizard"
+2. Set SSID to raspberryjam
+3. Select WPA2 as encryption
+4. Define a "TKIP"
+5. "Save and reboot router"
