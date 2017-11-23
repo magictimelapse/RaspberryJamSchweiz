@@ -35,7 +35,7 @@
     - name: "Set passwords"
       user:
         name: "{{ item }}"
-        password: "$6$nw959CQs8kPPq9xF$Iryuf7hB1pG4cFmnUU09NKzUbNUjoCk.Me7boIbL8dkMWoYFNMb7PbdCrZRptk5rxwMdxCO98lPAZp.jBamqQ."
+        password: "$6$ov0p2HC4$GE0adXQKMc7Pazx1aPmVH6J4s8bFopGdgKUc2aanDxXHuVDahxBvZlhecvEXXfOpe0FDTyykuFmgn5EKX/eOW1"
         update_password: always
       with_items:
         - root
