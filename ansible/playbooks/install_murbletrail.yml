@@ -1,0 +1,23 @@
+---
+- name: "Checkout murbletrail repository"
+  git:
+    repo: 'https://github.com/lamba09/murmelbahn.git'
+    dest: /home/pi/murmelbahn
+    update: yes
+  become: yes
+  become_user: pi
+
+- name: "Install tools to build PCA9685 "
+  apt: name={{ item }} state=latest
+  with_items:
+    - git
+    - build-essential
+    - python-dev
+
+- name: "Clone PCA9685 repository"
+  git: repo="https://github.com/adafruit/Adafruit_Python_PCA9685.git" dest=/opt/Adafruit_Python_PCA9685
+
+- name: "Install Python PCA9685 module"
+  shell: python setup.py install
+  args:
+    chdir : /opt/Adafruit_Python_PCA9685
