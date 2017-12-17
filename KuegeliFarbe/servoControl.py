@@ -17,14 +17,14 @@ ServoPositions= {
 
 def set_servo_pulse(channel, pulse):
     pulse_length = 1000000 # 1,000,000 us per second
-    pulse_length /= 50 # 60 Hz
+    pulse_length /= 60 # 60 Hz
     pulse_length /= 4096 # 12 bits of resolution
     pulse *= 1000
     pulse /= pulse_length
     pulse = round(pulse)
     pulse = int(pulse)
     pwm.set_pwm(channel, 0, pulse)
-    pwm.set_pwm_freq(50)
+    pwm.set_pwm_freq(60)
 
 def auf(servoNummer=0):
     set_servo_pulse(servoNummer,ServoPositions[servoNummer]["auf"])
