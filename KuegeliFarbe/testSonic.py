@@ -9,14 +9,16 @@ try:
         farbe = gibFarbe()
         print (farbe)
         if farbe == "rot":
-            play (A4,attack=0.1, sustain=6*sleepTime)
+            play (A4,attack=1, sustain=6*sleepTime)
+            play (A4,attack=1, sustain=6*sleepTime)
         elif farbe == "gruen":
-            play(B4,attack=0.1, sustain=6*sleepTime)
+            play(B4,attack=1, sustain=6*sleepTime)
         elif farbe == "orange":
-            play (C5,attack=0.1, sustain=6*sleepTime)
+            play (C5,attack=1, sustain=6*sleepTime)
         elif farbe == "gelb":
-            play(E5,attack=0.1, sustain=6*sleepTime)
-     
+            play(E5,attack=1, sustain=6*sleepTime)
+        elif farbe == "blau":
+            play(D4,attack=1, sustain=6*sleepTime)
 
  
       

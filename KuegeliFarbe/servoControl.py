@@ -8,7 +8,7 @@ servoEnd = 2.5
 HOST = 'localhost'
 PORT = 42001
 ServoPositions= {
-    0:{"auf":2.5, "zu":1.4},
+    0:{"auf":2.5, "zu":1.5},
     1:{"auf":1.8, "zu":0.75},
       2:{"auf":1.8, "zu":0.6},
          3:{"auf":1.8, "zu":0.75}

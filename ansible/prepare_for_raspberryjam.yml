@@ -26,10 +26,16 @@
     - name: "Include VNC installation"
       include: "playbooks/install_vnc.yml"
 
+    - name: "Include Eggbot installation"
+      include: "playbooks/install_eggbot_extension.yml"
+
+    - name: "Include Murbletrail installation"
+      include: "playbooks/install_murbletrail.yml"
+
     - name: "Set passwords"
       user:
         name: "{{ item }}"
-        password: "$6$nw959CQs8kPPq9xF$Iryuf7hB1pG4cFmnUU09NKzUbNUjoCk.Me7boIbL8dkMWoYFNMb7PbdCrZRptk5rxwMdxCO98lPAZp.jBamqQ."
+        password: "$6$ov0p2HC4$GE0adXQKMc7Pazx1aPmVH6J4s8bFopGdgKUc2aanDxXHuVDahxBvZlhecvEXXfOpe0FDTyykuFmgn5EKX/eOW1"
         update_password: always
       with_items:
         - root
@@ -39,11 +45,9 @@
       git:
         repo: 'https://github.com/magictimelapse/RaspberryJamSchweiz.git'
         dest: /home/pi/RaspberryJamSchweiz
+        update: yes
       become: yes
       become_user: pi
-
-    - name: "Include Eggbot installation"
-      include: "playbooks/install_eggbot_extension.yml"
 
     - name: "Remove Games"
       apt:

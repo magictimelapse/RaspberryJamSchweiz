@@ -17,21 +17,31 @@ from psonic import *
 # gibFarbe()
 ## gibt die Farbe des Kuegelchens am Sensor 
 
+### schlafen/warten
+#sleep(1)
+#wartet fuer 1 sekunde
+
 while True:
     print("Start")
-    auf(0)
-    sleep(1)
+    #auf(0)
+    #sleep(1)
     zu(0)
     sleep(1)
-    farbe == gibFarbe()
+    farbe = gibFarbe()
     if farbe == "rot":
         print ("das war rot!")
-
+    
     ## mache dasselbe fuer gruen, orange und gelb!
+    if farbe == "gelb":
+        print("gelb ist bloed")
 
 
+    if farbe == "gruen":
+        play(G5)
 
-
+    if farbe ==  "orange":
+        print("ach du bist so ein schoenes orange")
+        play(E4)
     ## Wenn eine rote Kugel kommt, dann spiel ein C5!
 
 

@@ -14,7 +14,7 @@ def removeDuplicateRows(a):
 
 append = True
 NumberOfUniqueEntriesPerColor = 200
-farben = ["rot", "gelb", "orange", "gruen", "leer"]
+farben = ["rot", "gelb", "orange", "gruen","blau", "leer"]
 kf = kuegelifarbe.KuegeliFarbe()
 data_targets = np.zeros((1,5),np.int32) 
 #target = []
