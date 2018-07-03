@@ -33,8 +33,9 @@ def next_colour():
 
     if (r == 255 and b > 0 and g == 0):
         b -= 1
+    return (r,g,b)
 
-while True:
-    sense.clear([r, g, b])
-    msleep(2)
-    next_colour()
+#while True:
+#    sense.clear([r, g, b])
+#    msleep(2)
+#    next_colour()

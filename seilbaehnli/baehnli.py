@@ -1,16 +1,22 @@
 #!/usr/bin/env python
 import serialStepperControl
 import time
+from datetime import datetime
 from anzeige import Anzeige
+msleep = lambda x: time.sleep(x / 1000.0)
+
 class Baehnli(object):
     def __init__(self):
         self.ssc = serialStepperControl.SerialStepperControl()
-        self.ssc.torque(200)
+        self.ssc.torque(280)
         self.anzeige = Anzeige()
         self.anzeige.baehnli(0.)
+    def __del__(self):
+        self.ssc.stop()
     def move(self,hoch=True):
-        speeds = [40,60,80,100,100,100]
-        steps =  [200,200,200,200,200,200]
+        speeds = [15,15,15,15,15,15]
+        ds = 140
+        steps =  [ds,ds,ds,ds,ds,ds]
         
         for ii,(speed,step) in enumerate(zip(speeds,steps)):
             print (speed,step)
@@ -20,7 +26,7 @@ class Baehnli(object):
             print(progress)
             self.anzeige.baehnli(progress)
             self.ssc.setSpeed(speed)
-            if not hoch:
+            if hoch:
                 step = -step
             self.ssc.step(step)
 
@@ -40,13 +46,22 @@ class Baehnli(object):
 
 if __name__ == "__main__":
     b = Baehnli()
-    while True:
+    #time.sleep(4*60*60+30*60)
+    start = datetime.now()
+    time.sleep(5)
+    stop = datetime.now()
+    diff = (stop - start).total_seconds()
+    while diff < 6*60*60:
+        stop = datetime.now()
+        diff = (stop - start).total_seconds()
         if b.button():
             b.hoch()
             time.sleep(5)
             b.runter()
             time.sleep(5)
         else:
-            time.sleep(1)
             b.stop()
+            msleep(1)
+            b.anzeige.off()
+            
     

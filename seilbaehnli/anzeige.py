@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 from sense_hat import SenseHat
+from colorcycle import next_colour
 import numpy as np
+import animations
+import random
+from datetime import datetime
 r = [255,0,0]
 o = [255,127,0]
 y = [255,255,0]
@@ -11,13 +15,14 @@ v = [159,0,255]
 e = [0,0,0]
 w = [255,255,255]
 br = [165,42,42]
+
 class Anzeige(object):
     def __init__(self):
         self.sense = SenseHat()
         self.sense.clear()
         self.hintergrund()
-
-
+        self.animations = animations.Animations(self.sense)
+        self.start = datetime.now()
     def regenbogen(self):
         image = [
             e,e,e,e,e,e,e,e,
@@ -31,7 +36,26 @@ class Anzeige(object):
         ]
         self.sense.set_pixels(image)
 
-
+    def off(self):
+        r,g,b = next_colour()
+        #print(r,g,b)
+        #if (r,g,b) == (255,0,0) or (r,g,b) == (0,255,0) or (r,g,b) == (0,0,255):
+        now = datetime.now()
+    
+        diff = now -self.start
+        
+        if diff.seconds>15:
+            self.start = datetime.now()
+            rand = random.random()
+            if rand<1./3.:
+                self.animations.rocket()
+            elif rand<2./3.:
+                self.animations.smiley()
+            else:
+                self.animations.regenbogen()
+            
+        self.sense.clear([r,g,b])
+        
 
     def hintergrund(self):
         image =  [

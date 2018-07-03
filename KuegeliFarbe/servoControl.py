@@ -1,6 +1,7 @@
 import time
 import Adafruit_PCA9685
-pwm = Adafruit_PCA9685.PCA9685(address=0x41)
+#pwm = Adafruit_PCA9685.PCA9685(address=0x41)
+pwm = Adafruit_PCA9685.PCA9685(address=0x40)
 servoStart = 0.6
 servo = servoStart
 servoEnd = 2.5
